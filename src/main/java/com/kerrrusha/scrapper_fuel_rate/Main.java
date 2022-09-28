@@ -1,21 +1,13 @@
 package com.kerrrusha.scrapper_fuel_rate;
 
-import com.kerrrusha.scrapper_fuel_rate.model.GasStationFuelRate;
-import com.kerrrusha.scrapper_fuel_rate.parser.GasStationCity;
-import com.kerrrusha.scrapper_fuel_rate.parser.RateParser;
-import com.kerrrusha.scrapper_fuel_rate.parser.RateParserSource;
 
-import java.io.IOException;
-import java.util.List;
+import com.kerrrusha.scrapper_fuel_rate.presentation.cli.commands.MainCommand;
+import picocli.CommandLine;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		List<GasStationFuelRate> ratesAutoria =
-				RateParser.parseConcreteRates(RateParserSource.AUTORIA, GasStationCity.KYIV);
-		System.out.println(ratesAutoria);
-
-		List<GasStationFuelRate> ratesMinfin =
-				RateParser.parseConcreteRates(RateParserSource.MINFIN, GasStationCity.ODESA);
-		System.out.println(ratesMinfin);
+	public static void main(String[] args) {
+		final CommandLine cmd = new CommandLine(new MainCommand());
+		int exitCode = cmd.execute(args);
+		System.exit(exitCode);
 	}
 }

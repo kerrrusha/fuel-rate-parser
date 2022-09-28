@@ -4,19 +4,18 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public final class Config {
-	private static final String jsonPath = Objects.requireNonNull(Config.class.
-			getClassLoader().getResource("config.json")).getPath();
 	private static Config instance;
 
 	private final Map<ConfigKey, String> data;
 
-	private Config(String jsonPath) {
-		Optional<JSONObject> jsonOptional = readJsonObject(jsonPath);
+	private Config() {
+		Optional<JSONObject> jsonOptional = readJsonObject();
 		data = new HashMap<>();
 		if (jsonOptional.isEmpty()) {
 			return;
@@ -29,7 +28,7 @@ public final class Config {
 
 	public static Config getInstance() {
 		if (instance == null) {
-			instance = new Config(jsonPath);
+			instance = new Config();
 		}
 		return instance;
 	}
@@ -38,9 +37,13 @@ public final class Config {
 		return data.get(key);
 	}
 
-	private Optional<JSONObject> readJsonObject(String jsonPath) {
-		try(FileReader fr = new FileReader(jsonPath)) {
-			return Optional.of((JSONObject) new JSONParser().parse(fr));
+	private Optional<JSONObject> readJsonObject() {
+		try(InputStreamReader reader = new InputStreamReader(
+				Objects.requireNonNull(
+						Config.class.getResourceAsStream("/config.json")
+				), StandardCharsets.UTF_8
+		)) {
+			return Optional.of((JSONObject) new JSONParser().parse(reader));
 		} catch (IOException | ParseException e) {
 			throw new RuntimeException(e);
 		}
