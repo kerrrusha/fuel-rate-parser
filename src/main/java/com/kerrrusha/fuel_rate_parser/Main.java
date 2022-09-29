@@ -1,7 +1,7 @@
-package com.kerrrusha.scrapper_fuel_rate;
+package com.kerrrusha.fuel_rate_parser;
 
 
-import com.kerrrusha.scrapper_fuel_rate.presentation.cli.commands.MainCommand;
+import com.kerrrusha.fuel_rate_parser.presentation.cli.commands.MainCommand;
 import picocli.CommandLine;
 
 public class Main {

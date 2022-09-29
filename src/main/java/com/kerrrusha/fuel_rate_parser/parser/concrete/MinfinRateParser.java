@@ -1,11 +1,12 @@
-package com.kerrrusha.scrapper_fuel_rate.parser.concrete;
+package com.kerrrusha.fuel_rate_parser.parser.concrete;
 
-import com.kerrrusha.scrapper_fuel_rate.config.Config;
-import com.kerrrusha.scrapper_fuel_rate.config.ConfigKey;
-import com.kerrrusha.scrapper_fuel_rate.model.FuelName;
-import com.kerrrusha.scrapper_fuel_rate.model.GasStationFuelRate;
-import com.kerrrusha.scrapper_fuel_rate.parser.GasStationCity;
-import com.kerrrusha.scrapper_fuel_rate.parser.ParseStrategy;
+import com.kerrrusha.fuel_rate_parser.config.Config;
+import com.kerrrusha.fuel_rate_parser.config.ConfigKey;
+import com.kerrrusha.fuel_rate_parser.model.FuelName;
+import com.kerrrusha.fuel_rate_parser.model.GasStationFuelRate;
+import com.kerrrusha.fuel_rate_parser.parser.GasStationCity;
+import com.kerrrusha.fuel_rate_parser.parser.ParseStrategy;
+import com.kerrrusha.fuel_rate_parser.tools.ParserUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -42,15 +43,15 @@ public class MinfinRateParser implements ParseStrategy {
 		final Document document = Jsoup.connect(URL).get();
 		List<Element> rows = document.select(ROWS_CSS_SELECTOR);
 		rows.forEach(row -> {
-			String gasStationName = ParserUtils.getTextOfFirstInRow(row, GAS_STATION_NAME_CSS_SELECTOR);
+			String gasStationName = ParserUtil.getTextOfFirstInRow(row, GAS_STATION_NAME_CSS_SELECTOR);
 
 			GasStationFuelRate newRate = new GasStationFuelRate(gasStationName);
 
-			ParserUtils.tryPutPrice(row, newRate, FuelName.A95P, "td:nth-child(3)");
-			ParserUtils.tryPutPrice(row, newRate, FuelName.A95, "td:nth-child(4)");
-			ParserUtils.tryPutPrice(row, newRate, FuelName.A92, "td:nth-child(5)");
-			ParserUtils.tryPutPrice(row, newRate, FuelName.GAZ, "td:nth-child(7)");
-			ParserUtils.tryPutPrice(row, newRate, FuelName.DT, "td:nth-child(6)");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.A95P, "td:nth-child(3)");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.A95, "td:nth-child(4)");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.A92, "td:nth-child(5)");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.GAS, "td:nth-child(7)");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.DT, "td:nth-child(6)");
 
 			rates.add(newRate);
 		});

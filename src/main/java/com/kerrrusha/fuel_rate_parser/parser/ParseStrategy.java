@@ -1,6 +1,6 @@
-package com.kerrrusha.scrapper_fuel_rate.parser;
+package com.kerrrusha.fuel_rate_parser.parser;
 
-import com.kerrrusha.scrapper_fuel_rate.model.GasStationFuelRate;
+import com.kerrrusha.fuel_rate_parser.model.GasStationFuelRate;
 
 import java.io.IOException;
 import java.util.List;

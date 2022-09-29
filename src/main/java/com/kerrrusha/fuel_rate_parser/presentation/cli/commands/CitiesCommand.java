@@ -1,7 +1,7 @@
-package com.kerrrusha.scrapper_fuel_rate.presentation.cli.commands;
+package com.kerrrusha.fuel_rate_parser.presentation.cli.commands;
 
-import com.kerrrusha.scrapper_fuel_rate.parser.GasStationCity;
-import com.kerrrusha.scrapper_fuel_rate.presentation.cli.OutputUtil;
+import com.kerrrusha.fuel_rate_parser.parser.GasStationCity;
+import com.kerrrusha.fuel_rate_parser.tools.OutputUtil;
 import picocli.CommandLine;
 
 @CommandLine.Command(

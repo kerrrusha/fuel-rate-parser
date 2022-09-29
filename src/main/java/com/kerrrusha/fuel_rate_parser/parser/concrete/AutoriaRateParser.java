@@ -1,11 +1,12 @@
-package com.kerrrusha.scrapper_fuel_rate.parser.concrete;
+package com.kerrrusha.fuel_rate_parser.parser.concrete;
 
-import com.kerrrusha.scrapper_fuel_rate.config.Config;
-import com.kerrrusha.scrapper_fuel_rate.config.ConfigKey;
-import com.kerrrusha.scrapper_fuel_rate.model.FuelName;
-import com.kerrrusha.scrapper_fuel_rate.model.GasStationFuelRate;
-import com.kerrrusha.scrapper_fuel_rate.parser.GasStationCity;
-import com.kerrrusha.scrapper_fuel_rate.parser.ParseStrategy;
+import com.kerrrusha.fuel_rate_parser.config.Config;
+import com.kerrrusha.fuel_rate_parser.config.ConfigKey;
+import com.kerrrusha.fuel_rate_parser.model.FuelName;
+import com.kerrrusha.fuel_rate_parser.model.GasStationFuelRate;
+import com.kerrrusha.fuel_rate_parser.parser.GasStationCity;
+import com.kerrrusha.fuel_rate_parser.parser.ParseStrategy;
+import com.kerrrusha.fuel_rate_parser.tools.ParserUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -25,7 +26,7 @@ public class AutoriaRateParser implements ParseStrategy {
 			entry(FuelName.A95, "a95"),
 			entry(FuelName.A92, "a92"),
 			entry(FuelName.DT, "dt"),
-			entry(FuelName.GAZ, "gaz")
+			entry(FuelName.GAS, "gaz")
 	);
 	private static final Map<GasStationCity, String> gasStationCityToEndpointName = Map.ofEntries(
 			entry(GasStationCity.KYIV, "kiev"),
@@ -49,15 +50,15 @@ public class AutoriaRateParser implements ParseStrategy {
 		final Document document = Jsoup.connect(URL).get();
 		List<Element> rows = document.select(ROWS_CSS_SELECTOR);
 		rows.forEach(row -> {
-			String gasStationName = ParserUtils.getTextOfFirstInRow(row, GAS_STATION_NAME_CSS_SELECTOR);
+			String gasStationName = ParserUtil.getTextOfFirstInRow(row, GAS_STATION_NAME_CSS_SELECTOR);
 
 			GasStationFuelRate newRate = new GasStationFuelRate(gasStationName);
 
-			ParserUtils.tryPutPrice(row, newRate, FuelName.A95P, "." + fuelNameToCssTags.get(FuelName.A95P) + " span");
-			ParserUtils.tryPutPrice(row, newRate, FuelName.A95, "." + fuelNameToCssTags.get(FuelName.A95) + " span");
-			ParserUtils.tryPutPrice(row, newRate, FuelName.A92, "." + fuelNameToCssTags.get(FuelName.A92) + " span");
-			ParserUtils.tryPutPrice(row, newRate, FuelName.GAZ, "." + fuelNameToCssTags.get(FuelName.GAZ) + " span");
-			ParserUtils.tryPutPrice(row, newRate, FuelName.DT, "." + fuelNameToCssTags.get(FuelName.DT) + " span");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.A95P, "." + fuelNameToCssTags.get(FuelName.A95P) + " span");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.A95, "." + fuelNameToCssTags.get(FuelName.A95) + " span");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.A92, "." + fuelNameToCssTags.get(FuelName.A92) + " span");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.GAS, "." + fuelNameToCssTags.get(FuelName.GAS) + " span");
+			ParserUtil.tryPutPrice(row, newRate, FuelName.DT, "." + fuelNameToCssTags.get(FuelName.DT) + " span");
 
 			rates.add(newRate);
 		});

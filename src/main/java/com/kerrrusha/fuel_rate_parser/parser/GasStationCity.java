@@ -1,4 +1,4 @@
-package com.kerrrusha.scrapper_fuel_rate.parser;
+package com.kerrrusha.fuel_rate_parser.parser;
 
 public enum GasStationCity {
 	KYIV, LVIV, ODESA, CHERNIHIV, TERNOPIL;

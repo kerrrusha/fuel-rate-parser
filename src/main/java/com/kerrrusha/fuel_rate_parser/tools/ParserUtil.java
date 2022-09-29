@@ -1,11 +1,12 @@
-package com.kerrrusha.scrapper_fuel_rate.parser.concrete;
+package com.kerrrusha.fuel_rate_parser.tools;
 
-import com.kerrrusha.scrapper_fuel_rate.model.FuelName;
-import com.kerrrusha.scrapper_fuel_rate.model.GasStationFuelRate;
+import com.kerrrusha.fuel_rate_parser.model.FuelName;
+import com.kerrrusha.fuel_rate_parser.model.GasStationFuelRate;
+import com.kerrrusha.fuel_rate_parser.parser.concrete.AutoriaRateParser;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 
-public class ParserUtils {
+public class ParserUtil {
 	private final static Logger logger = Logger.getLogger(AutoriaRateParser.class);
 
 	public static void tryPutPrice(Element row, GasStationFuelRate rate, FuelName fuel, String cssSelector) {

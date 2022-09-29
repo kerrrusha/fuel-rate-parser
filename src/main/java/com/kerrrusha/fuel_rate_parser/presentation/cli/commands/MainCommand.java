@@ -1,4 +1,4 @@
-package com.kerrrusha.scrapper_fuel_rate.presentation.cli.commands;
+package com.kerrrusha.fuel_rate_parser.presentation.cli.commands;
 
 import picocli.CommandLine;
 

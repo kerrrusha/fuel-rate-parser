@@ -1,4 +1,4 @@
-package com.kerrrusha.scrapper_fuel_rate.config;
+package com.kerrrusha.fuel_rate_parser.config;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

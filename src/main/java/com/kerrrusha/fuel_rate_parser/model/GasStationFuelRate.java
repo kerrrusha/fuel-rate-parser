@@ -1,4 +1,4 @@
-package com.kerrrusha.scrapper_fuel_rate.model;
+package com.kerrrusha.fuel_rate_parser.model;
 
 import java.util.HashMap;
 import java.util.Map;
